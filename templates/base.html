@@ -6,17 +6,17 @@
     <title>Mon Portfolio</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-100 text-gray-800 flex flex-col min-h-screen">
+<body class="bg-gray-50 text-gray-800 flex flex-col min-h-screen">
 
     <!-- Header / Navigation -->
-    <header class="bg-white shadow-md sticky top-0 z-40">
+    <header class="bg-gray-900 shadow-md sticky top-0 z-40">
         <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="{% url 'index' %}" class="text-2xl font-bold text-gray-800">Mon Logo</a>
+            <a href="{% url 'index' %}" class="text-2xl font-bold text-orange-500">Mon Logo</a>
             <div class="space-x-4">
-                <a href="{% url 'index' %}" class="text-gray-600 hover:text-blue-500">Accueil</a>
-                <a href="{% url 'about' %}" class="text-gray-600 hover:text-blue-500">À Propos</a>
-                <a href="{% url 'services' %}" class="text-gray-600 hover:text-blue-500">Services</a>
-                <a href="{% url 'contact' %}" class="text-gray-600 hover:text-blue-500">Contact</a>
+                <a href="{% url 'index' %}" class="text-gray-300 hover:text-orange-500 transition-colors duration-300">Accueil</a>
+                <a href="{% url 'about' %}" class="text-gray-300 hover:text-orange-500 transition-colors duration-300">À Propos</a>
+                <a href="{% url 'services' %}" class="text-gray-300 hover:text-orange-500 transition-colors duration-300">Services</a>
+                <a href="{% url 'contact' %}" class="text-gray-300 hover:text-orange-500 transition-colors duration-300">Contact</a>
             </div>
         </nav>
     </header>
@@ -39,7 +39,7 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-gray-800 text-white mt-12">
+    <footer class="bg-gray-900 text-gray-400">
         <div class="container mx-auto px-6 py-4 text-center">
             <p>&copy; {% now "Y" %} Mon Portfolio. Tous droits réservés.</p>
         </div>
