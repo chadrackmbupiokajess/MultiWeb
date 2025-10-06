@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mx-auto p-8">
+    <div class="bg-white rounded-lg shadow-lg p-8 md:p-12">
+        <h1 class="text-4xl md:text-5xl font-bold text-center mb-12">Mes Services</h1>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            
+            <!-- Service 1 -->
+            <div class="border border-gray-200 rounded-lg p-6 text-center hover:shadow-xl transition-shadow duration-300">
+                <h3 class="text-2xl font-bold mb-4">Développement Web</h3>
+                <p class="text-gray-700">
+                    Création de sites web et d'applications sur mesure, de la conception à la mise en production, en utilisant des technologies modernes comme Django et React.
+                </p>
+            </div>
+
+            <!-- Service 2 -->
+            <div class="border border-gray-200 rounded-lg p-6 text-center hover:shadow-xl transition-shadow duration-300">
+                <h3 class="text-2xl font-bold mb-4">Conception de Base de Données</h3>
+                <p class="text-gray-700">
+                    Modélisation et optimisation de bases de données relationnelles pour garantir la performance et l'intégrité de vos données.
+                </p>
+            </div>
+
+            <!-- Service 3 -->
+            <div class="border border-gray-200 rounded-lg p-6 text-center hover:shadow-xl transition-shadow duration-300">
+                <h3 class="text-2xl font-bold mb-4">Maintenance & Déploiement</h3>
+                <p class="text-gray-700">
+                    Assistance pour le déploiement de vos applications sur des serveurs, et mise en place de contrats de maintenance pour assurer leur bon fonctionnement.
+                </p>
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock %}

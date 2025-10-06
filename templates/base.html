@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mon Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 text-gray-800 flex flex-col min-h-screen">
+
+    <!-- Header / Navigation -->
+    <header class="bg-white shadow-md sticky top-0 z-40">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="{% url 'index' %}" class="text-2xl font-bold text-gray-800">Mon Logo</a>
+            <div class="space-x-4">
+                <a href="{% url 'index' %}" class="text-gray-600 hover:text-blue-500">Accueil</a>
+                <a href="{% url 'about' %}" class="text-gray-600 hover:text-blue-500">À Propos</a>
+                <a href="{% url 'services' %}" class="text-gray-600 hover:text-blue-500">Services</a>
+                <a href="{% url 'contact' %}" class="text-gray-600 hover:text-blue-500">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Messages -->
+    {% if messages %}
+        <div class="container mx-auto px-6 py-4">
+            {% for message in messages %}
+                <div class="p-4 mb-4 text-sm text-green-700 bg-green-100 rounded-lg shadow" role="alert">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <!-- Main Content -->
+    <main class="flex-grow">
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white mt-12">
+        <div class="container mx-auto px-6 py-4 text-center">
+            <p>&copy; {% now "Y" %} Mon Portfolio. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
