@@ -27,16 +27,18 @@
 </div>
 
 <!-- Projects Section -->
-<section id="projects" class="py-20 bg-gray-50">
+<section id="projects" class="py-20 bg-gray-50 overflow-hidden">
     <div class="container mx-auto px-6">
-        <div class="text-center mb-12">
+        <div class="text-center mb-12 animate-on-scroll">
             <h2 class="text-3xl md:text-4xl font-bold text-gray-800">Une sélection de mes travaux</h2>
             <p class="text-lg text-gray-600 mt-2">Voici quelques-uns des projets sur lesquels j'ai eu le plaisir de travailler.</p>
         </div>
         
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {% for project in projects %}
-            <div class="bg-white rounded-lg shadow-lg overflow-hidden transform hover:scale-105 transition-transform duration-300">
+            {% load static %}
+            {% widthratio forloop.counter0 1 100 as delay %}
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden animate-on-scroll" style="transition-delay: {{ delay }}ms;">
                 {% if project.image %}
                 <img class="w-full h-56 object-cover" src="{{ project.image.url }}" alt="Image du projet {{ project.title }}">
                 {% endif %}
@@ -57,8 +59,8 @@
 </section>
 
 <!-- Call to Action Section -->
-<section class="bg-gradient-to-br from-[#3F1560] to-[#2D1D7A]">
-    <div class="container mx-auto px-6 py-16 text-center">
+<section class="bg-gradient-to-br from-[#3F1560] to-[#2D1D7A] overflow-hidden">
+    <div class="container mx-auto px-6 py-16 text-center animate-on-scroll">
         <h2 class="text-3xl font-bold text-white mb-4">Prêt à démarrer votre projet ?</h2>
         <p class="text-indigo-100 text-lg max-w-xl mx-auto mb-8">
             Discutons de vos idées et voyons comment nous pouvons construire quelque chose d'incroyable ensemble.
@@ -84,9 +86,21 @@
     </div>
 </div>
 
+<style>
+    .animate-on-scroll {
+        opacity: 0;
+        transform: translateY(40px);
+        transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    }
+    .animate-on-scroll.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+</style>
+
 <script>
-    // Le script pour la modale reste inchangé
     document.addEventListener('DOMContentLoaded', () => {
+        // Script pour la modale (inchangé)
         const modal = document.getElementById('project-modal');
         const iframe = document.getElementById('project-iframe');
         const modalTitle = document.getElementById('modal-title');
@@ -121,6 +135,22 @@
             if (event.key === 'Escape' && !modal.classList.contains('hidden')) {
                 closeModal();
             }
+        });
+
+        // NOUVEAU script pour les animations au défilement
+        const targets = document.querySelectorAll('.animate-on-scroll');
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        targets.forEach(target => {
+            observer.observe(target);
         });
     });
 </script>
