@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.core.mail import send_mail
 from django.contrib import messages
 from django.conf import settings
@@ -22,10 +22,7 @@ def contact(request):
         message_body = request.POST.get('message')
 
         # Construire le message complet
-        full_message = f"""Message reçu de : {name} ({from_email})
-
-{message_body}
-"""
+        full_message = f"""Message reçu de : {name} ({from_email})\n\n{message_body}\n"""
 
         try:
             send_mail(
@@ -42,3 +39,8 @@ def contact(request):
         return redirect('contact')
 
     return render(request, 'main/contact.html')
+
+def project_detail(request, pk):
+    project = get_object_or_404(Project, pk=pk)
+    context = {'project': project}
+    return render(request, 'main/project_detail.html', context)

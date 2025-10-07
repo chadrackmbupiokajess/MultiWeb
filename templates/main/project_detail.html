@@ -1,37 +1,96 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ project.title }}</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-gray-100 text-gray-800">
+{% extends 'base.html' %}
 
-    <div class="container mx-auto p-4 md:p-8">
-        <main class="bg-white rounded-lg shadow-lg p-6 md:p-8">
-            
-            <a href="{% url 'index' %}" class="inline-block bg-gray-200 text-gray-700 font-semibold px-4 py-2 rounded hover:bg-gray-300 transition-colors duration-300 mb-6">&larr; Retour aux projets</a>
+{% block content %}
+<div class="bg-white dark:bg-gray-900 py-12">
+    <div class="container mx-auto px-6">
 
-            <h1 class="text-4xl md:text-5xl font-bold mb-4">{{ project.title }}</h1>
-            <p class="text-lg text-gray-500 mb-6">{{ project.date|date:"d F Y" }}</p>
+        <div class="max-w-4xl mx-auto">
+            <!-- Back Button -->
+            <a href="{% url 'index' %}#projects" class="inline-flex items-center text-gray-600 dark:text-gray-300 hover:text-orange-500 dark:hover:text-orange-400 mb-8 transition-colors duration-300">
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+                Retour aux projets
+            </a>
 
+            <!-- Project Header -->
+            <div class="text-center mb-8">
+                <h1 class="text-4xl md:text-5xl font-bold text-gray-800 dark:text-white">{{ project.title }}</h1>
+                <p class="text-lg text-gray-500 dark:text-gray-400 mt-2">{{ project.date|date:"d F Y" }}</p>
+            </div>
+
+            <!-- Project Image -->
             {% if project.image %}
-            <img class="w-full h-auto rounded-lg shadow-md mb-8" src="{{ project.image.url }}" alt="Image du projet {{ project.title }}">
+                <img class="w-full h-auto rounded-lg shadow-lg mb-12" src="{{ project.image.url }}" alt="Image du projet {{ project.title }}">
             {% endif %}
 
-            <div class="prose lg:prose-xl max-w-none">
+            <!-- Project Description -->
+            <div class="prose prose-lg dark:prose-invert max-w-none mx-auto text-gray-700 dark:text-gray-300">
                 <p>{{ project.description|linebreaks }}</p>
             </div>
 
+            <!-- Live Site Button -->
             {% if project.link %}
-            <div class="mt-8 text-center">
-                <a href="{{ project.link }}" target="_blank" class="inline-block bg-blue-500 text-white font-bold px-6 py-3 rounded-lg hover:bg-blue-600 transition-colors duration-300 text-lg">Voir le projet en ligne</a>
+            <div class="mt-12 text-center">
+                <button data-url="{{ project.link }}" class="open-modal-button px-10 py-4 bg-orange-500 text-white font-bold rounded-lg shadow-lg hover:bg-orange-600 transition-transform duration-300 transform hover:scale-105">
+                    Voir le site en direct
+                </button>
             </div>
             {% endif %}
-
-        </main>
+        </div>
     </div>
+</div>
 
-</body>
-</html>
+<!-- Full-screen Modal Structure (Copied from index.html) -->
+<div id="project-modal" class="fixed inset-0 bg-white hidden flex flex-col z-50">
+    <div class="flex items-center p-3 border-b bg-gray-50 shadow-sm flex-shrink-0">
+        <button id="close-modal-button" class="bg-gray-200 text-gray-800 font-semibold px-4 py-2 rounded-lg hover:bg-gray-300 transition-colors duration-300 flex items-center">
+            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+            Retour
+        </button>
+        <h3 id="modal-title" class="text-lg font-bold ml-4 text-gray-700"></h3>
+    </div>
+    <div class="flex-grow">
+        <iframe id="project-iframe" class="w-full h-full border-0" src="" sandbox="allow-scripts allow-forms allow-same-origin"></iframe>
+    </div>
+</div>
+
+<script>
+    // Script pour la modale (Copied from index.html)
+    document.addEventListener('DOMContentLoaded', () => {
+        const modal = document.getElementById('project-modal');
+        const iframe = document.getElementById('project-iframe');
+        const modalTitle = document.getElementById('modal-title');
+        const closeModalButton = document.getElementById('close-modal-button');
+        const openModalButtons = document.querySelectorAll('.open-modal-button');
+
+        const openModal = (url, title) => {
+            iframe.src = url;
+            modalTitle.textContent = title;
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        };
+
+        const closeModal = () => {
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+            iframe.src = '';
+            modalTitle.textContent = '';
+        };
+
+        openModalButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const projectUrl = button.dataset.url;
+                const projectTitle = "{{ project.title }}"; // Get title from the context
+                openModal(projectUrl, projectTitle);
+            });
+        });
+
+        closeModalButton.addEventListener('click', closeModal);
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape' && !modal.classList.contains('hidden')) {
+                closeModal();
+            }
+        });
+    });
+</script>
+{% endblock %}

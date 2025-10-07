@@ -36,21 +36,19 @@
         
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {% for project in projects %}
-            {% load static %}
             {% widthratio forloop.counter0 1 100 as delay %}
-            <div class="bg-white dark:bg-gray-800/50 rounded-lg shadow-lg overflow-hidden animate-on-scroll" style="transition-delay: {{ delay }}ms;">
+            <a href="{% url 'project_detail' project.pk %}" class="block bg-white dark:bg-gray-800/50 rounded-lg shadow-lg overflow-hidden animate-on-scroll group" style="transition-delay: {{ delay }}ms;">
                 {% if project.image %}
-                <img class="w-full h-56 object-cover" src="{{ project.image.url }}" alt="Image du projet {{ project.title }}">
+                <div class="overflow-hidden">
+                    <img class="w-full h-56 object-cover group-hover:scale-110 transition-transform duration-500 ease-in-out" src="{{ project.image.url }}" alt="Image du projet {{ project.title }}">
+                </div>
                 {% endif %}
                 <div class="p-6">
                     <h3 class="text-2xl font-bold mb-2 dark:text-white">{{ project.title }}</h3>
                     <p class="text-sm text-gray-500 dark:text-gray-400 mb-4">{{ project.date|date:"d F Y" }}</p>
                     <p class="text-gray-700 dark:text-gray-300 mb-4">{{ project.description|truncatewords:20 }}</p>
-                    {% if project.link %}
-                    <button data-url="{{ project.link }}" class="open-modal-button inline-block bg-orange-500 text-white font-semibold px-4 py-2 rounded hover:bg-orange-600 transition-colors duration-300">Voir le projet</button>
-                    {% endif %}
                 </div>
-            </div>
+            </a>
             {% empty %}
             <p class="text-center col-span-full dark:text-gray-300">Aucun projet à afficher pour le moment.</p>
             {% endfor %}
@@ -71,21 +69,6 @@
     </div>
 </section>
 
-
-<!-- Full-screen Modal Structure (inchangé) -->
-<div id="project-modal" class="fixed inset-0 bg-white hidden flex flex-col z-50">
-    <div class="flex items-center p-3 border-b bg-gray-50 shadow-sm flex-shrink-0">
-        <button id="close-modal-button" class="bg-gray-200 text-gray-800 font-semibold px-4 py-2 rounded-lg hover:bg-gray-300 transition-colors duration-300 flex items-center">
-            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
-            Retour
-        </button>
-        <h3 id="modal-title" class="text-lg font-bold ml-4 text-gray-700"></h3>
-    </div>
-    <div class="flex-grow">
-        <iframe id="project-iframe" class="w-full h-full border-0" src="" sandbox="allow-scripts allow-forms allow-same-origin"></iframe>
-    </div>
-</div>
-
 <style>
     .animate-on-scroll {
         opacity: 0;
@@ -100,44 +83,6 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', () => {
-        // Script pour la modale (inchangé)
-        const modal = document.getElementById('project-modal');
-        const iframe = document.getElementById('project-iframe');
-        const modalTitle = document.getElementById('modal-title');
-        const closeModalButton = document.getElementById('close-modal-button');
-        const openModalButtons = document.querySelectorAll('.open-modal-button');
-
-        const openModal = (url, title) => {
-            iframe.src = url;
-            modalTitle.textContent = title;
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
-        };
-
-        const closeModal = () => {
-            modal.classList.add('hidden');
-            modal.classList.remove('flex');
-            iframe.src = '';
-            modalTitle.textContent = '';
-        };
-
-        openModalButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                const projectUrl = button.dataset.url;
-                const projectTitle = button.closest('.p-6').querySelector('h3').textContent;
-                openModal(projectUrl, projectTitle);
-            });
-        });
-
-        closeModalButton.addEventListener('click', closeModal);
-
-        document.addEventListener('keydown', (event) => {
-            if (event.key === 'Escape' && !modal.classList.contains('hidden')) {
-                closeModal();
-            }
-        });
-
-        // NOUVEAU script pour les animations au défilement
         const targets = document.querySelectorAll('.animate-on-scroll');
 
         const observer = new IntersectionObserver((entries, observer) => {
