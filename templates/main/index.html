@@ -27,39 +27,39 @@
 </div>
 
 <!-- Projects Section -->
-<section id="projects" class="py-20 bg-gray-50 overflow-hidden">
+<section id="projects" class="py-20 bg-gray-50 dark:bg-gray-800">
     <div class="container mx-auto px-6">
         <div class="text-center mb-12 animate-on-scroll">
-            <h2 class="text-3xl md:text-4xl font-bold text-gray-800">Une sélection de mes travaux</h2>
-            <p class="text-lg text-gray-600 mt-2">Voici quelques-uns des projets sur lesquels j'ai eu le plaisir de travailler.</p>
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-800 dark:text-white">Une sélection de mes travaux</h2>
+            <p class="text-lg text-gray-600 dark:text-gray-300 mt-2">Voici quelques-uns des projets sur lesquels j'ai eu le plaisir de travailler.</p>
         </div>
         
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {% for project in projects %}
             {% load static %}
             {% widthratio forloop.counter0 1 100 as delay %}
-            <div class="bg-white rounded-lg shadow-lg overflow-hidden animate-on-scroll" style="transition-delay: {{ delay }}ms;">
+            <div class="bg-white dark:bg-gray-800/50 rounded-lg shadow-lg overflow-hidden animate-on-scroll" style="transition-delay: {{ delay }}ms;">
                 {% if project.image %}
                 <img class="w-full h-56 object-cover" src="{{ project.image.url }}" alt="Image du projet {{ project.title }}">
                 {% endif %}
                 <div class="p-6">
-                    <h3 class="text-2xl font-bold mb-2">{{ project.title }}</h3>
-                    <p class="text-sm text-gray-500 mb-4">{{ project.date|date:"d F Y" }}</p>
-                    <p class="text-gray-700 mb-4">{{ project.description|truncatewords:20 }}</p>
+                    <h3 class="text-2xl font-bold mb-2 dark:text-white">{{ project.title }}</h3>
+                    <p class="text-sm text-gray-500 dark:text-gray-400 mb-4">{{ project.date|date:"d F Y" }}</p>
+                    <p class="text-gray-700 dark:text-gray-300 mb-4">{{ project.description|truncatewords:20 }}</p>
                     {% if project.link %}
                     <button data-url="{{ project.link }}" class="open-modal-button inline-block bg-orange-500 text-white font-semibold px-4 py-2 rounded hover:bg-orange-600 transition-colors duration-300">Voir le projet</button>
                     {% endif %}
                 </div>
             </div>
             {% empty %}
-            <p class="text-center col-span-full">Aucun projet à afficher pour le moment.</p>
+            <p class="text-center col-span-full dark:text-gray-300">Aucun projet à afficher pour le moment.</p>
             {% endfor %}
         </div>
     </div>
 </section>
 
 <!-- Call to Action Section -->
-<section class="bg-gradient-to-br from-[#3F1560] to-[#2D1D7A] overflow-hidden">
+<section class="bg-gradient-to-br from-[#3F1560] to-[#2D1D7A]">
     <div class="container mx-auto px-6 py-16 text-center animate-on-scroll">
         <h2 class="text-3xl font-bold text-white mb-4">Prêt à démarrer votre projet ?</h2>
         <p class="text-indigo-100 text-lg max-w-xl mx-auto mb-8">

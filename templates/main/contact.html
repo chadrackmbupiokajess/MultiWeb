@@ -2,33 +2,33 @@
 
 {% block content %}
 <div class="container mx-auto p-8">
-    <div class="bg-white rounded-lg shadow-lg p-8 md:p-12 max-w-2xl mx-auto">
-        <h1 class="text-4xl md:text-5xl font-bold text-center mb-12">Contactez-moi</h1>
+    <div class="bg-white dark:bg-gray-800/50 rounded-lg shadow-lg p-8 md:p-12 max-w-2xl mx-auto">
+        <h1 class="text-4xl md:text-5xl font-bold text-center mb-12 text-gray-800 dark:text-white">Contactez-moi</h1>
         
         <form action="#" method="POST">
             {% csrf_token %}
             <div class="space-y-6">
                 <!-- Name -->
                 <div>
-                    <label for="name" class="block text-lg font-medium text-gray-700">Nom</label>
-                    <input type="text" name="name" id="name" required class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 text-lg">
+                    <label for="name" class="block text-lg font-medium text-gray-700 dark:text-gray-300">Nom</label>
+                    <input type="text" name="name" id="name" required class="mt-1 block w-full px-4 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-orange-500 focus:border-orange-500 text-lg text-gray-900 dark:text-white">
                 </div>
 
                 <!-- Email -->
                 <div>
-                    <label for="email" class="block text-lg font-medium text-gray-700">Email</label>
-                    <input type="email" name="email" id="email" required class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 text-lg">
+                    <label for="email" class="block text-lg font-medium text-gray-700 dark:text-gray-300">Email</label>
+                    <input type="email" name="email" id="email" required class="mt-1 block w-full px-4 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-orange-500 focus:border-orange-500 text-lg text-gray-900 dark:text-white">
                 </div>
 
                 <!-- Message -->
                 <div>
-                    <label for="message" class="block text-lg font-medium text-gray-700">Message</label>
-                    <textarea name="message" id="message" rows="6" required class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 text-lg"></textarea>
+                    <label for="message" class="block text-lg font-medium text-gray-700 dark:text-gray-300">Message</label>
+                    <textarea name="message" id="message" rows="6" required class="mt-1 block w-full px-4 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-orange-500 focus:border-orange-500 text-lg text-gray-900 dark:text-white"></textarea>
                 </div>
 
                 <!-- Submit Button -->
                 <div class="text-center">
-                    <button type="submit" class="inline-flex justify-center py-3 px-8 border border-transparent shadow-sm text-lg font-medium rounded-md text-white bg-blue-500 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-300">
+                    <button type="submit" class="inline-flex justify-center py-3 px-8 border border-transparent shadow-sm text-lg font-medium rounded-md text-white bg-orange-500 hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 transition-colors duration-300">
                         Envoyer le message
                     </button>
                 </div>
