@@ -1,4 +1,13 @@
 from django.contrib import admin
-from .models import Project
+from .models import Project, Subscriber
 
-admin.site.register(Project)
+@admin.register(Project)
+class ProjectAdmin(admin.ModelAdmin):
+    list_display = ('title', 'date')
+    search_fields = ('title',)
+
+@admin.register(Subscriber)
+class SubscriberAdmin(admin.ModelAdmin):
+    list_display = ('email', 'subscribed_at')
+    readonly_fields = ('subscribed_at',)
+    search_fields = ('email',)
