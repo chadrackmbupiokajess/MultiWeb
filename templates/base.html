@@ -5,13 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mon Portfolio</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="{% url 'manifest' %}">
+    <meta name="theme-color" content="#2D1D7A">
+
     <script>
         // Logique de thème finale et prévisible
-        // Applique le mode sombre UNIQUEMENT si l'utilisateur l'a choisi et sauvegardé.
         if (localStorage.getItem('theme') === 'dark') {
             document.documentElement.classList.add('dark');
         } else {
-            // Pour tous les autres cas (thème 'light' ou pas de thème sauvegardé), on s'assure que le mode clair est appliqué.
             document.documentElement.classList.remove('dark');
         }
     </script>
@@ -68,6 +71,7 @@
     <footer class="bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400"><div class="container mx-auto px-6 py-4 text-center"><p>&copy; {% now "Y" %} Mon Portfolio. Tous droits réservés.</p></div></footer>
 
     <script>
+        // Script du menu et du thème (inchangé)
         document.addEventListener('DOMContentLoaded', () => {
             const mobileMenuButton = document.getElementById('mobile-menu-button');
             const mobileMenu = document.getElementById('mobile-menu');
@@ -104,6 +108,17 @@
                 }
             });
         });
+
+        // PWA Service Worker Registration
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('{% url "serviceworker" %}').then(function(registration) {
+                    console.log('ServiceWorker registration successful with scope: ', registration.scope);
+                }, function(err) {
+                    console.log('ServiceWorker registration failed: ', err);
+                });
+            });
+        }
     </script>
 
 </body>
