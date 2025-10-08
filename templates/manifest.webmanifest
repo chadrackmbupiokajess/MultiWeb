@@ -1,13 +1,16 @@
 {
   "name": "Tous Projets de Chadrack Mbu Jess",
   "short_name": "Tous Projets",
-  "id": "/",
+  "id": "/?source=pwa",
   "start_url": "/",
   "display": "standalone",
   "orientation": "any",
   "background_color": "#ffffff",
   "theme_color": "#2D1D7A",
   "description": "Le portfolio de développement de Chadrack Mbu Jess, présentant tous ses projets.",
+  "categories": ["business", "productivity", "personalization"],
+  "prefer_related_applications": false,
+  "related_applications": [],
   "icons": [
     {
       "src": "/static/images/icon-192x192.png",
@@ -22,18 +25,18 @@
   ],
   "screenshots": [
     {
-      "src": "/static/images/screenshot1.png",
+      "src": "/static/images/screenshot-desktop.png",
       "sizes": "1280x720",
       "type": "image/png",
       "form_factor": "wide",
-      "label": "Page d'accueil du portfolio"
+      "label": "Vue sur Ordinateur"
     },
     {
-      "src": "/static/images/screenshot2.png",
-      "sizes": "1280x720",
+      "src": "/static/images/screenshot-mobile.png",
+      "sizes": "720x1280",
       "type": "image/png",
-      "form_factor": "wide",
-      "label": "Détail d'un projet"
+      "form_factor": "narrow",
+      "label": "Vue sur Mobile"
     }
   ]
 }
