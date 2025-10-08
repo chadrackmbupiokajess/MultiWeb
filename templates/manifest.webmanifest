@@ -1,11 +1,13 @@
 {
-  "name": "Mon Portfolio Professionnel",
-  "short_name": "Portfolio",
+  "name": "Tous Projets de Chadrack Mbu Jess",
+  "short_name": "Tous Projets",
+  "id": "/",
   "start_url": "/",
   "display": "standalone",
+  "orientation": "any",
   "background_color": "#ffffff",
   "theme_color": "#2D1D7A",
-  "description": "Le portfolio de développement de [Votre Nom]",
+  "description": "Le portfolio de développement de Chadrack Mbu Jess, présentant tous ses projets.",
   "icons": [
     {
       "src": "/static/images/icon-192x192.png",
@@ -16,6 +18,22 @@
       "src": "/static/images/icon-512x512.png",
       "sizes": "512x512",
       "type": "image/png"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/static/images/screenshot1.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Page d'accueil du portfolio"
+    },
+    {
+      "src": "/static/images/screenshot2.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Détail d'un projet"
     }
   ]
 }
