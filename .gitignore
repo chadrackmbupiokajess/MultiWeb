@@ -1,0 +1,13 @@
+# Cache Python
+__pycache__/
+*.pyc
+
+# Fichiers d'environnement (NE JAMAIS PARTAGER)
+.env
+
+# Base de données locale
+db.sqlite3
+
+# Dossiers de fichiers collectés
+staticfiles/
+media/
