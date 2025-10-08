@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.http import JsonResponse
 from django.core.mail import send_mail
 from django.contrib import messages
 from django.conf import settings
@@ -49,25 +50,19 @@ def project_detail(request, pk):
 def subscribe(request):
     if request.method == 'POST':
         email = request.POST.get('email')
-        # Redirige vers la page d'origine, ou l'accueil par défaut
-        redirect_url = request.META.get('HTTP_REFERER', '/')
 
         if not email:
-            messages.error(request, 'Veuillez fournir une adresse e-mail.')
-            return redirect(redirect_url)
+            return JsonResponse({'status': 'error', 'message': 'Veuillez fournir une adresse e-mail.'}, status=400)
 
         try:
             validate_email(email)
         except ValidationError:
-            messages.error(request, 'Adresse e-mail invalide.')
-            return redirect(redirect_url)
+            return JsonResponse({'status': 'error', 'message': 'Adresse e-mail invalide.'}, status=400)
 
         if Subscriber.objects.filter(email=email).exists():
-            messages.info(request, 'Vous êtes déjà abonné à notre newsletter.')
-            return redirect(redirect_url)
+            return JsonResponse({'status': 'info', 'message': 'Vous êtes déjà abonné.'})
         
         Subscriber.objects.create(email=email)
-        messages.success(request, 'Merci pour votre inscription ! Vous recevrez nos prochaines publications.')
+        return JsonResponse({'status': 'success', 'message': 'Merci ! Inscription réussie.'})
     
-    # Redirige vers la page d'origine après le traitement
-    return redirect(redirect_url)
+    return JsonResponse({'status': 'error', 'message': 'Requête invalide.'}, status=405)
