@@ -1,0 +1,8 @@
+[{
+      "relation": ["delegate_permission/common.handle_all_urls"],
+      "target": {
+        "namespace": "android_app",
+        "package_name": "com.pythonanywhere.tousprojetmbujess.twa",
+        "sha256_cert_fingerprints": ["B8:2C:AB:84:05:8C:A2:BD:36:1E:63:E9:AE:68:46:D4:4E:93:BC:66:D1:B3:9D:7D:93:C4:D7:96:E3:E3:21:2F"]
+      }
+    }]

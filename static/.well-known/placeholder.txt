@@ -1,0 +1,1 @@
+Ce dossier est nécessaire pour la vérification de l'application Android.
