@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="bg-white dark:bg-gray-900 py-20">
+    <div class="container mx-auto px-6 text-center">
+        <div class="max-w-md mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-800 dark:text-white mb-4">
+                Erreur sur {{ site_settings.site_name }}
+            </h2>
+            <p class="text-lg text-gray-600 dark:text-gray-300 mb-8">
+                Oups ! Quelque chose s'est mal passé de notre côté. Nous travaillons pour résoudre le problème.
+            </p>
+            <a href="{% url 'index' %}" class="px-8 py-3 bg-orange-500 text-white font-semibold rounded-lg shadow-md hover:bg-orange-600 transition-transform duration-300 transform hover:scale-105">
+                Retour à l'accueil
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

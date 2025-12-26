@@ -66,3 +66,6 @@ def subscribe(request):
         return JsonResponse({'status': 'success', 'message': 'Merci ! Inscription réussie.'})
     
     return JsonResponse({'status': 'error', 'message': 'Requête invalide.'}, status=405)
+
+def custom_500(request):
+    return render(request, '500.html', status=500)
