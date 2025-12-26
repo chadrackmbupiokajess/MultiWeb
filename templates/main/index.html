@@ -37,7 +37,7 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {% for project in projects %}
             {% widthratio forloop.counter0 1 100 as delay %}
-            <a href="{% url 'project_detail' project.pk %}" class="block bg-white dark:bg-gray-800/50 rounded-lg shadow-lg overflow-hidden animate-on-scroll group" style="transition-delay: {{ delay }}ms;">
+            <a href="{% url 'project_detail' project.slug %}" class="block bg-white dark:bg-gray-800/50 rounded-lg shadow-lg overflow-hidden animate-on-scroll group" style="transition-delay: {{ delay }}ms;">
                 {% if project.image %}
                 <div class="overflow-hidden">
                     <img class="w-full h-56 object-cover group-hover:scale-110 transition-transform duration-500 ease-in-out" src="{{ project.image.url }}" alt="Image du projet {{ project.title }}">

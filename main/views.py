@@ -42,8 +42,8 @@ def contact(request):
 
     return render(request, 'main/contact.html')
 
-def project_detail(request, pk):
-    project = get_object_or_404(Project, pk=pk)
+def project_detail(request, slug):
+    project = get_object_or_404(Project, slug=slug)
     context = {'project': project}
     return render(request, 'main/project_detail.html', context)
 
