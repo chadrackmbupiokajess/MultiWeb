@@ -37,6 +37,7 @@ class NavigationItem(models.Model):
         return self.title
 
 class SiteSettings(models.Model):
+    site_name = models.CharField(max_length=200, default='Mon Portfolio')
     logo = models.ImageField(upload_to='site/', blank=True, null=True)
     favicon = models.ImageField(upload_to='site/', blank=True, null=True)
 

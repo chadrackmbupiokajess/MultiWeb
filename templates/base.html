@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mon Portfolio</title>
+    <title>{{ site_settings.site_name }}</title>
     {% load static %}
     {% if site_settings.favicon %}
         <link rel="icon" href="{{ site_settings.favicon.url }}" type="image/x-icon">
@@ -36,12 +36,13 @@
     <!-- Header / Navigation -->
     <header class="bg-white dark:bg-gray-800/50 dark:backdrop-blur-sm shadow-sm sticky top-0 z-40 relative">
         <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
-            <a href="{% url 'index' %}">
+            <a href="{% url 'index' %}" class="flex items-center space-x-3">
                 {% if site_settings.logo %}
                     <img src="{{ site_settings.logo.url }}" alt="Logo du site" class="h-10 w-auto">
                 {% else %}
                     <img src="{% static 'images/logo.ico' %}" alt="Logo du site" class="h-10 w-auto">
                 {% endif %}
+                <span class="text-xl font-bold">{{ site_settings.site_name }}</span>
             </a>
             <div class="flex items-center">
                 <div class="hidden md:flex space-x-4">
@@ -93,7 +94,7 @@
                 <div id="subscribe-message" class="mt-2 text-sm h-5"></div>
             </div>
             <div class="py-4 text-center border-t border-gray-200 dark:border-gray-700">
-                <p>&copy; {% now "Y" %} Mon Portfolio. Tous droits réservés.</p>
+                <p>&copy; {% now "Y" %} {{ site_settings.site_name }}. Tous droits réservés.</p>
             </div>
         </div>
     </footer>
