@@ -22,7 +22,6 @@ class NavigationItemAdmin(admin.ModelAdmin):
 
 @admin.register(SiteSettings)
 class SiteSettingsAdmin(admin.ModelAdmin):
-    list_display = ('site_name',)
     def has_add_permission(self, request):
         return not SiteSettings.objects.exists()
 
