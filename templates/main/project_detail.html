@@ -28,11 +28,11 @@
             </div>
 
             <!-- Live Site Button -->
-            {% if project.link %}
+            {% if project.is_public and project.link %}
             <div class="mt-12 text-center">
-                <button data-url="{{ project.link }}" class="open-modal-button px-10 py-4 bg-orange-500 text-white font-bold rounded-lg shadow-lg hover:bg-orange-600 transition-transform duration-300 transform hover:scale-105">
+                <a href="{{ project.link }}" target="_blank" rel="noopener noreferrer" class="inline-block px-10 py-4 bg-orange-500 text-white font-bold rounded-lg shadow-lg hover:bg-orange-600 transition-transform duration-300 transform hover:scale-105">
                     Voir le site en direct
-                </button>
+                </a>
             </div>
             {% endif %}
         </div>

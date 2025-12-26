@@ -6,6 +6,7 @@ class Project(models.Model):
     image = models.ImageField(upload_to='projects/', blank=True, null=True)
     link = models.URLField(blank=True, null=True)
     date = models.DateField()
+    is_public = models.BooleanField(default=True)
 
     def __str__(self):
         return self.title
