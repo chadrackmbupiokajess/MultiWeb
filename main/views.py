@@ -7,6 +7,8 @@ from django.core.validators import validate_email
 from django.core.exceptions import ValidationError
 from .models import Project, Subscriber, SiteSettings
 from django.core.paginator import Paginator
+from django.urls import reverse
+from django.contrib.staticfiles.storage import staticfiles_storage
 
 def index(request):
     project_list = Project.objects.order_by('-is_pinned', '-date')
@@ -103,3 +105,35 @@ def manifest_view(request):
             "type": "image/png"
         })
     return JsonResponse(manifest)
+
+def offline_view(request):
+    return render(request, 'offline.html')
+
+def serviceworker_view(request):
+    settings_obj = SiteSettings.load()
+    
+    # URLs de base à mettre en cache
+    cache_urls = [
+        reverse('index'),
+        reverse('accueil'),
+        reverse('about'),
+        reverse('services'),
+        reverse('contact'),
+        reverse('offline'),
+        staticfiles_storage.url('images/favicon.ico'), # Fallback favicon
+        staticfiles_storage.url('images/logo.ico'), # Fallback logo
+    ]
+
+    # Ajouter les images dynamiques si elles existent
+    if settings_obj.logo:
+        cache_urls.append(settings_obj.logo.url)
+    if settings_obj.favicon:
+        cache_urls.append(settings_obj.favicon.url)
+    if settings_obj.pwa_icon_192:
+        cache_urls.append(settings_obj.pwa_icon_192.url)
+    if settings_obj.pwa_icon_512:
+        cache_urls.append(settings_obj.pwa_icon_512.url)
+
+    # Rendre le template du Service Worker avec la liste des URLs
+    response = render(request, 'serviceworker.js', {'cache_urls': cache_urls}, content_type='application/javascript')
+    return response

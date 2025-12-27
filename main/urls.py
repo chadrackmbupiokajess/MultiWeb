@@ -9,4 +9,5 @@ urlpatterns = [
     path('contact/', views.contact, name='contact'),
     path('projet/<slug:slug>/', views.project_detail, name='project_detail'),
     path('inscription/', views.subscribe, name='subscribe'),
+    path('offline/', views.offline_view, name='offline'),
 ]

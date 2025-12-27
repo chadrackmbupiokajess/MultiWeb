@@ -9,7 +9,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('main.urls')),
     path('manifest.webmanifest', main_views.manifest_view, name='manifest'),
-    path('serviceworker.js', TemplateView.as_view(template_name='serviceworker.js', content_type='application/javascript'), name='serviceworker'),
+    path('serviceworker.js', main_views.serviceworker_view, name='serviceworker'),
 ]
 
 if settings.DEBUG:
