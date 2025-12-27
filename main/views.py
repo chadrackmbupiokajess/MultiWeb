@@ -6,10 +6,16 @@ from django.conf import settings
 from django.core.validators import validate_email
 from django.core.exceptions import ValidationError
 from .models import Project, Subscriber
+from django.core.paginator import Paginator
 
 def index(request):
-    projects = Project.objects.order_by('-date')
-    context = {'projects': projects}
+    project_list = Project.objects.order_by('-date')
+    paginator = Paginator(project_list, 6) # 6 projets par page
+
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    context = {'page_obj': page_obj}
     return render(request, 'main/index.html', context)
 
 def about(request):
