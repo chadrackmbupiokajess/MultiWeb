@@ -42,7 +42,7 @@
                 <!-- Right Column: Mobile Image -->
                 <div class="md:col-span-2 md:sticky md:top-24">
                     {% if project.mobile_image %}
-                        <img src="{{ project.mobile_image.url }}" alt="Version mobile du projet {{ project.title }}" class="w-full h-auto rounded-lg shadow-lg">
+                        <img src="{{ project.mobile_image.url }}" alt="Version mobile du projet {{ project.title }}" class="max-w-xs mx-auto h-auto rounded-lg shadow-lg">
                         <p class="text-center text-sm text-gray-500 dark:text-gray-400 mt-4">Aperçu de la version mobile</p>
                     {% endif %}
                 </div>
