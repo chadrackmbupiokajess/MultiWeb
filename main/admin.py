@@ -7,6 +7,14 @@ class ProjectAdmin(admin.ModelAdmin):
     list_filter = ('is_public',)
     search_fields = ('title',)
     prepopulated_fields = {'slug': ('title',)}
+    fieldsets = (
+        (None, {
+            'fields': ('title', 'slug', 'description', 'date', 'is_public', 'link')
+        }),
+        ('Images', {
+            'fields': ('image', 'mobile_image')
+        }),
+    )
 
 @admin.register(Subscriber)
 class SubscriberAdmin(admin.ModelAdmin):

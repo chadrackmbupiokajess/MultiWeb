@@ -6,6 +6,7 @@ class Project(models.Model):
     slug = models.SlugField(max_length=200, unique=True, blank=True)
     description = models.TextField()
     image = models.ImageField(upload_to='projects/', blank=True, null=True)
+    mobile_image = models.ImageField(upload_to='projects/mobile/', blank=True, null=True)
     link = models.URLField(blank=True, null=True)
     date = models.DateField()
     is_public = models.BooleanField(default=True)
