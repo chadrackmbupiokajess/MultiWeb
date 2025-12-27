@@ -39,14 +39,17 @@ class SiteSettingsAdmin(admin.ModelAdmin):
         ('Général', {
             'fields': ('site_name', 'logo', 'favicon')
         }),
+        ('PWA', {
+            'fields': ('pwa_icon_192', 'pwa_icon_512')
+        }),
         ('Page d\'accueil', {
             'fields': ('hero_description',)
         }),
         ('Page À Propos', {
             'fields': ('about_title', 'about_description', 'about_image')
         }),
-        ('PWA', {
-            'fields': ('pwa_icon_192', 'pwa_icon_512')
+        ('Page Contact', {
+            'fields': ('contact_title', 'contact_subtitle', 'contact_info', 'contact_email', 'github_url', 'linkedin_url')
         }),
     )
 

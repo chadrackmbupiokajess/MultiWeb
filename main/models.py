@@ -51,15 +51,30 @@ class NavigationItem(models.Model):
         return self.title
 
 class SiteSettings(models.Model):
+    # General
     site_name = models.CharField(max_length=200, default='Mon Portfolio')
     logo = models.ImageField(upload_to='site/', blank=True, null=True)
     favicon = models.ImageField(upload_to='site/', blank=True, null=True)
-    hero_description = RichTextUploadingField(blank=True)
+    
+    # PWA
     pwa_icon_192 = models.ImageField(upload_to='site/pwa/', blank=True, null=True)
     pwa_icon_512 = models.ImageField(upload_to='site/pwa/', blank=True, null=True)
+
+    # Home Page
+    hero_description = RichTextUploadingField(blank=True)
+
+    # About Page
     about_title = models.CharField(max_length=200, blank=True, default="À Propos de Nous")
     about_description = RichTextUploadingField(blank=True)
     about_image = models.ImageField(upload_to='site/about/', blank=True, null=True)
+
+    # Contact Page
+    contact_title = models.CharField(max_length=200, blank=True, default="Discutons de votre projet")
+    contact_subtitle = models.CharField(max_length=200, blank=True, default="Je suis toujours ouvert à de nouvelles opportunités.")
+    contact_info = RichTextUploadingField(blank=True)
+    contact_email = models.EmailField(blank=True)
+    github_url = models.URLField(blank=True)
+    linkedin_url = models.URLField(blank=True)
 
     def save(self, *args, **kwargs):
         self.pk = 1
