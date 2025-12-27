@@ -8,7 +8,7 @@ from django.core.exceptions import ValidationError
 from .models import Project, Subscriber
 
 def index(request):
-    projects = Project.objects.all()
+    projects = Project.objects.order_by('-date')
     context = {'projects': projects}
     return render(request, 'main/index.html', context)
 
