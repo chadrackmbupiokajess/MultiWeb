@@ -17,37 +17,40 @@
                 <p class="text-lg text-gray-500 dark:text-gray-400 mt-2">{{ project.date|date:"d F Y" }}</p>
             </div>
 
-            <!-- Main Content Grid -->
-            <div class="grid grid-cols-1 md:grid-cols-5 gap-12 items-start">
-
-                <!-- Left Column: Description -->
-                <div class="md:col-span-3">
-                    {% if project.image %}
-                        <img class="w-full h-auto rounded-lg shadow-lg mb-12" src="{{ project.image.url }}" alt="Image du projet {{ project.title }}">
-                    {% endif %}
-                    
-                    <div class="prose prose-lg dark:prose-invert max-w-none text-gray-700 dark:text-gray-300">
-                        <p>{{ project.description|linebreaks }}</p>
-                    </div>
-
-                    {% if project.is_public and project.link %}
-                    <div class="mt-12">
-                        <a href="{{ project.link }}" target="_blank" rel="noopener noreferrer" class="inline-block px-10 py-4 bg-orange-500 text-white font-bold rounded-lg shadow-lg hover:bg-orange-600 transition-transform duration-300 transform hover:scale-105">
-                            Voir le site en direct
-                        </a>
-                    </div>
-                    {% endif %}
+            <!-- Images Section -->
+            <div class="flex flex-wrap lg:flex-nowrap gap-8 mb-12 items-center">
+                <!-- Desktop Card -->
+                {% if project.image %}
+                <div class="w-full lg:w-1/2">
+                    <h3 class="text-xl font-bold text-center mb-4 dark:text-white">Version Ordinateur</h3>
+                    <img class="w-full h-auto rounded-lg shadow-xl" src="{{ project.image.url }}" alt="Image du projet {{ project.title }}">
                 </div>
+                {% endif %}
 
-                <!-- Right Column: Mobile Image -->
-                <div class="md:col-span-2 md:sticky md:top-24">
-                    {% if project.mobile_image %}
-                        <img src="{{ project.mobile_image.url }}" alt="Version mobile du projet {{ project.title }}" class="max-w-xs mx-auto h-auto rounded-lg shadow-lg">
-                        <p class="text-center text-sm text-gray-500 dark:text-gray-400 mt-4">Aperçu de la version mobile</p>
-                    {% endif %}
+                <!-- Mobile Card -->
+                {% if project.mobile_image %}
+                <div class="w-full lg:w-1/2 flex flex-col items-center">
+                    <h3 class="text-xl font-bold text-center mb-4 dark:text-white">Version Mobile</h3>
+                    <img src="{{ project.mobile_image.url }}" alt="Version mobile du projet {{ project.title }}" class="max-w-xs mx-auto h-auto max-h-[300px] rounded-lg shadow-xl">
                 </div>
-
+                {% endif %}
             </div>
+
+            <!-- Description and Link -->
+            <div class="max-w-4xl mx-auto">
+                <div class="prose prose-lg dark:prose-invert max-w-none text-gray-700 dark:text-gray-300">
+                    <p>{{ project.description|linebreaks }}</p>
+                </div>
+
+                {% if project.is_public and project.link %}
+                <div class="mt-12 text-center">
+                    <a href="{{ project.link }}" target="_blank" rel="noopener noreferrer" class="inline-block px-10 py-4 bg-orange-500 text-white font-bold rounded-lg shadow-lg hover:bg-orange-600 transition-transform duration-300 transform hover:scale-105">
+                        Voir le site en direct
+                    </a>
+                </div>
+                {% endif %}
+            </div>
+
         </div>
     </div>
 </div>
