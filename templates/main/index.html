@@ -12,9 +12,9 @@
             </span> 
             Digitales
         </h1>
-        <p class="text-lg md:text-xl text-indigo-200 mx-auto max-w-2xl mb-8">
-            {{ site_settings.hero_description }}
-        </p>
+        <div class="text-lg md:text-xl text-indigo-200 mx-auto max-w-2xl mb-8">
+            {{ site_settings.hero_description|safe }}
+        </div>
         <div class="flex justify-center space-x-4">
             <a href="#projects" class="px-8 py-3 bg-orange-500 text-white font-semibold rounded-lg shadow-md hover:bg-orange-600 transition-transform duration-300 transform hover:scale-105">
                 Voir nos projets
@@ -46,7 +46,9 @@
                 <div class="p-6">
                     <h3 class="text-2xl font-bold mb-2 dark:text-white">{{ project.title }}</h3>
                     <p class="text-sm text-gray-500 dark:text-gray-400 mb-4">{{ project.date|date:"d F Y" }}</p>
-                    <p class="text-gray-700 dark:text-gray-300 mb-4">{{ project.description|truncatewords:20 }}</p>
+                    <div class="text-gray-700 dark:text-gray-300 mb-4">
+                        {{ project.description|striptags|truncatewords:20 }}
+                    </div>
                 </div>
             </a>
             {% empty %}
