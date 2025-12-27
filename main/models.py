@@ -43,6 +43,8 @@ class SiteSettings(models.Model):
     logo = models.ImageField(upload_to='site/', blank=True, null=True)
     favicon = models.ImageField(upload_to='site/', blank=True, null=True)
     hero_description = models.TextField(blank=True)
+    pwa_icon_192 = models.ImageField(upload_to='site/pwa/', blank=True, null=True)
+    pwa_icon_512 = models.ImageField(upload_to='site/pwa/', blank=True, null=True)
 
     def save(self, *args, **kwargs):
         self.pk = 1

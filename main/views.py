@@ -5,7 +5,7 @@ from django.contrib import messages
 from django.conf import settings
 from django.core.validators import validate_email
 from django.core.exceptions import ValidationError
-from .models import Project, Subscriber
+from .models import Project, Subscriber, SiteSettings
 from django.core.paginator import Paginator
 
 def index(request):
@@ -75,3 +75,31 @@ def subscribe(request):
 
 def custom_500(request):
     return render(request, '500.html', status=500)
+
+def manifest_view(request):
+    settings = SiteSettings.load()
+    manifest = {
+        "name": settings.site_name,
+        "short_name": settings.site_name,
+        "id": "/?source=pwa",
+        "start_url": "/",
+        "display": "standalone",
+        "orientation": "any",
+        "background_color": "#ffffff",
+        "theme_color": "#2D1D7A",
+        "description": settings.hero_description,
+        "icons": []
+    }
+    if settings.pwa_icon_192:
+        manifest["icons"].append({
+            "src": settings.pwa_icon_192.url,
+            "sizes": "192x192",
+            "type": "image/png"
+        })
+    if settings.pwa_icon_512:
+        manifest["icons"].append({
+            "src": settings.pwa_icon_512.url,
+            "sizes": "512x512",
+            "type": "image/png"
+        })
+    return JsonResponse(manifest)

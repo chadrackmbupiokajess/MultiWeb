@@ -30,6 +30,18 @@ class NavigationItemAdmin(admin.ModelAdmin):
 
 @admin.register(SiteSettings)
 class SiteSettingsAdmin(admin.ModelAdmin):
+    fieldsets = (
+        ('Général', {
+            'fields': ('site_name', 'logo', 'favicon')
+        }),
+        ('Page d\'accueil', {
+            'fields': ('hero_description',)
+        }),
+        ('PWA', {
+            'fields': ('pwa_icon_192', 'pwa_icon_512')
+        }),
+    )
+
     def has_add_permission(self, request):
         return not SiteSettings.objects.exists()
 
