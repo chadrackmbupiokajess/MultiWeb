@@ -27,6 +27,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'ckeditor', # Ajouté
+    'ckeditor_uploader', # Ajouté
     'main',
 ]
 
@@ -114,6 +116,16 @@ STATIC_ROOT = BASE_DIR / 'staticfiles' # Dossier de collecte pour la production
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+
+# CKEditor settings
+CKEDITOR_UPLOAD_PATH = 'uploads/' # Chemin relatif à MEDIA_ROOT
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'full',
+        'height': 300,
+        'width': '100%',
+    },
+}
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field

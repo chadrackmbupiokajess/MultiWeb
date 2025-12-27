@@ -1,5 +1,14 @@
 from django.contrib import admin
 from .models import Project, Subscriber, NavigationItem, SiteSettings
+from ckeditor.widgets import CKEditorWidget # Importez CKEditorWidget
+from django import forms
+
+class SiteSettingsAdminForm(forms.ModelForm):
+    about_description = forms.CharField(widget=CKEditorWidget()) # Utilisez CKEditorWidget
+
+    class Meta:
+        model = SiteSettings
+        fields = '__all__'
 
 @admin.register(Project)
 class ProjectAdmin(admin.ModelAdmin):
@@ -30,12 +39,16 @@ class NavigationItemAdmin(admin.ModelAdmin):
 
 @admin.register(SiteSettings)
 class SiteSettingsAdmin(admin.ModelAdmin):
+    form = SiteSettingsAdminForm
     fieldsets = (
         ('Général', {
             'fields': ('site_name', 'logo', 'favicon')
         }),
         ('Page d\'accueil', {
             'fields': ('hero_description',)
+        }),
+        ('Page À Propos', {
+            'fields': ('about_title', 'about_description', 'about_image')
         }),
         ('PWA', {
             'fields': ('pwa_icon_192', 'pwa_icon_512')

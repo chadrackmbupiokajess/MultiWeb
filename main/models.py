@@ -45,6 +45,9 @@ class SiteSettings(models.Model):
     hero_description = models.TextField(blank=True)
     pwa_icon_192 = models.ImageField(upload_to='site/pwa/', blank=True, null=True)
     pwa_icon_512 = models.ImageField(upload_to='site/pwa/', blank=True, null=True)
+    about_title = models.CharField(max_length=200, blank=True, default="À Propos de Nous")
+    about_description = models.TextField(blank=True)
+    about_image = models.ImageField(upload_to='site/about/', blank=True, null=True)
 
     def save(self, *args, **kwargs):
         self.pk = 1
