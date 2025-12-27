@@ -9,7 +9,7 @@ from .models import Project, Subscriber
 from django.core.paginator import Paginator
 
 def index(request):
-    project_list = Project.objects.order_by('-date')
+    project_list = Project.objects.order_by('-is_pinned', '-date')
     paginator = Paginator(project_list, 6) # 6 projets par page
 
     page_number = request.GET.get('page')

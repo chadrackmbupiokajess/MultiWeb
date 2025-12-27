@@ -3,13 +3,13 @@ from .models import Project, Subscriber, NavigationItem, SiteSettings
 
 @admin.register(Project)
 class ProjectAdmin(admin.ModelAdmin):
-    list_display = ('title', 'date', 'is_public')
-    list_filter = ('is_public',)
+    list_display = ('title', 'date', 'is_public', 'is_pinned')
+    list_filter = ('is_public', 'is_pinned')
     search_fields = ('title',)
     prepopulated_fields = {'slug': ('title',)}
     fieldsets = (
         (None, {
-            'fields': ('title', 'slug', 'description', 'date', 'is_public', 'link')
+            'fields': ('title', 'slug', 'description', 'date', 'is_public', 'is_pinned', 'link')
         }),
         ('Images', {
             'fields': ('image', 'mobile_image')

@@ -10,6 +10,7 @@ class Project(models.Model):
     link = models.URLField(blank=True, null=True)
     date = models.DateField()
     is_public = models.BooleanField(default=True)
+    is_pinned = models.BooleanField(default=False)
 
     def __str__(self):
         return self.title
