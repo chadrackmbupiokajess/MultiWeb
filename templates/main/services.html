@@ -7,29 +7,16 @@
         
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             
-            <!-- Service 1 -->
+            {% for service in services %}
             <div class="border border-gray-200 dark:border-gray-700 rounded-lg p-6 text-center hover:shadow-xl dark:hover:bg-gray-700/50 transition-shadow duration-300">
-                <h3 class="text-2xl font-bold mb-4 text-gray-800 dark:text-white">Développement Web</h3>
-                <p class="text-gray-700 dark:text-gray-300">
-                    Création de sites web et d'applications sur mesure, de la conception à la mise en production, en utilisant des technologies modernes comme Django et React.
-                </p>
+                <h3 class="text-2xl font-bold mb-4 text-gray-800 dark:text-white">{{ service.title }}</h3>
+                <div class="text-gray-700 dark:text-gray-300">
+                    {{ service.description|safe }}
+                </div>
             </div>
-
-            <!-- Service 2 -->
-            <div class="border border-gray-200 dark:border-gray-700 rounded-lg p-6 text-center hover:shadow-xl dark:hover:bg-gray-700/50 transition-shadow duration-300">
-                <h3 class="text-2xl font-bold mb-4 text-gray-800 dark:text-white">Conception de Base de Données</h3>
-                <p class="text-gray-700 dark:text-gray-300">
-                    Modélisation et optimisation de bases de données relationnelles pour garantir la performance et l'intégrité de vos données.
-                </p>
-            </div>
-
-            <!-- Service 3 -->
-            <div class="border border-gray-200 dark:border-gray-700 rounded-lg p-6 text-center hover:shadow-xl dark:hover:bg-gray-700/50 transition-shadow duration-300">
-                <h3 class="text-2xl font-bold mb-4 text-gray-800 dark:text-white">Maintenance & Déploiement</h3>
-                <p class="text-gray-700 dark:text-gray-300">
-                    Assistance pour le déploiement de vos applications sur des serveurs, et mise en place de contrats de maintenance pour assurer leur bon fonctionnement.
-                </p>
-            </div>
+            {% empty %}
+            <p class="text-center text-gray-500 col-span-full">Aucun service n'est disponible pour le moment.</p>
+            {% endfor %}
 
         </div>
     </div>

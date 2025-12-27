@@ -1,14 +1,5 @@
 from django.contrib import admin
-from .models import Project, Subscriber, NavigationItem, SiteSettings
-from ckeditor.widgets import CKEditorWidget # Importez CKEditorWidget
-from django import forms
-
-class SiteSettingsAdminForm(forms.ModelForm):
-    about_description = forms.CharField(widget=CKEditorWidget()) # Utilisez CKEditorWidget
-
-    class Meta:
-        model = SiteSettings
-        fields = '__all__'
+from .models import Project, Subscriber, NavigationItem, SiteSettings, Service
 
 @admin.register(Project)
 class ProjectAdmin(admin.ModelAdmin):
@@ -25,6 +16,12 @@ class ProjectAdmin(admin.ModelAdmin):
         }),
     )
 
+@admin.register(Service)
+class ServiceAdmin(admin.ModelAdmin):
+    list_display = ('title', 'order')
+    list_editable = ('order',)
+    search_fields = ('title',)
+
 @admin.register(Subscriber)
 class SubscriberAdmin(admin.ModelAdmin):
     list_display = ('email', 'subscribed_at')
@@ -35,11 +32,9 @@ class SubscriberAdmin(admin.ModelAdmin):
 class NavigationItemAdmin(admin.ModelAdmin):
     list_display = ('title', 'url', 'order')
     list_editable = ('order',)
-    prepopulated_fields = {'url': ('title',)}
 
 @admin.register(SiteSettings)
 class SiteSettingsAdmin(admin.ModelAdmin):
-    form = SiteSettingsAdminForm
     fieldsets = (
         ('Général', {
             'fields': ('site_name', 'logo', 'favicon')
@@ -56,7 +51,9 @@ class SiteSettingsAdmin(admin.ModelAdmin):
     )
 
     def has_add_permission(self, request):
+        # Empêche l'ajout de nouvelles instances si une existe déjà
         return not SiteSettings.objects.exists()
 
     def has_delete_permission(self, request, obj=None):
+        # Empêche la suppression de l'instance
         return False

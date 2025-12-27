@@ -7,6 +7,7 @@ from main import views as main_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('ckeditor/', include('ckeditor_uploader.urls')), # Ajouté
     path('', include('main.urls')),
     path('manifest.webmanifest', main_views.manifest_view, name='manifest'),
     path('serviceworker.js', main_views.serviceworker_view, name='serviceworker'),

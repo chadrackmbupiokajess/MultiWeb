@@ -5,7 +5,7 @@ from django.contrib import messages
 from django.conf import settings
 from django.core.validators import validate_email
 from django.core.exceptions import ValidationError
-from .models import Project, Subscriber, SiteSettings
+from .models import Project, Subscriber, SiteSettings, Service
 from django.core.paginator import Paginator
 from django.urls import reverse
 from django.contrib.staticfiles.storage import staticfiles_storage
@@ -24,7 +24,9 @@ def about(request):
     return render(request, 'main/about.html')
 
 def services(request):
-    return render(request, 'main/services.html')
+    services_list = Service.objects.all()
+    context = {'services': services_list}
+    return render(request, 'main/services.html', context)
 
 def contact(request):
     if request.method == 'POST':
